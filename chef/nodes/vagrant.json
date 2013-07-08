@@ -1,0 +1,84 @@
+{
+    "ntp": {
+        "servers": ["clock.nc.fukuoka-u.ac.jp", "clock2.tl.fukuoka-u.ac.jp"]
+    },
+    "httpd": {
+        "document_root": "/projects/www/"
+    },
+    "postgresql": {
+        "version":"9.2",
+        "config": {
+            "log_rotation_age": "1d",
+            "log_rotation_size": "10MB",
+            "log_filename": "postgresql-%Y-%m-%d_%H%M%S.log",
+            "listen_addresses":"*",
+            "port":"5432"
+        },
+        "pg_hba":[
+            {
+                "type":"local",
+                "db":"all",
+                "user":"all",
+                "method":"trust"
+            },
+            {
+                "type":"host",
+                "db":"all",
+                "user":"all",
+                "addr":"127.0.0.1/32",
+                "method":"trust"
+            },
+            {
+                "type":"host",
+                "db":"all",
+                "user":"all",
+                "addr":"::1/128 ",
+                "method":"md5"
+            },
+            {
+                "type":"host",
+                "db":"all",
+                "user":"all",
+                "addr":"192.168.33.0/24",
+                "method":"trust"
+            }
+        ],
+        "enable_pgdg_yum":true,
+        "dir":"/var/lib/pgsql/9.2/data",
+        "client":{
+            "packages":["postgresql92","postgresql92-devel","postgresql92-server"]
+        },
+        "server":{
+            "packages":["postgresql92-server"],
+            "service_name":"postgresql-9.2"
+        },
+        "contrib":{
+            "packages":"postgresql92-contrib"
+        },
+        "password": {
+          "postgres": "postgres"
+        }
+    },
+    "mysql" : {
+        "bind-address" : "0.0.0.0",
+        "server_debian_password" : "www",
+        "server_root_password" : "www",
+        "server_repl_password" : "www"
+    },
+    "run_list":[
+        "ntp",
+        "yum::epel",
+        "yum::remi",
+        "apache",
+        "php",
+        "recipe[user]",
+        "recipe[postgresql]",
+        "recipe[postgresql::server]",
+        "recipe[app]",
+        "recipe[app::postgresql]",
+        "recipe[mysql::server]",
+        "recipe[app::mysql]",
+        "java",
+        "jenkins"
+    ]
+}
