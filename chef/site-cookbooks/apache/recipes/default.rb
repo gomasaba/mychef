@@ -13,6 +13,7 @@
 end
 
 service "httpd" do
+  action :enable
   supports :status => true, :restart => true, :reload => true
 end
 

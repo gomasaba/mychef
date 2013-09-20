@@ -18,4 +18,3 @@ vagrant 1.2.2
 
 をvagrantのpluginとしてインストールしました。
 
-

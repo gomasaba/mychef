@@ -3,7 +3,7 @@
         "servers": ["clock.nc.fukuoka-u.ac.jp", "clock2.tl.fukuoka-u.ac.jp"]
     },
     "httpd": {
-        "document_root": "/projects/www/"
+        "document_root": "/projects/www/html"
     },
     "postgresql": {
         "version":"9.2",
