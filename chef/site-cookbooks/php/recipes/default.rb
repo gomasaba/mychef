@@ -14,14 +14,26 @@
     end
 end
 execute "phpunit" do
-    command "pear config-set auto_discover 1"
+    command "pear config-set auto_discover 1 && pear install pear.phpunit.de/PHPUnit"
     action :run
     not_if "which phpunit"
 end
-execute "phpunit" do
-    command "pear install pear.phpunit.de/PHPUnit"
+
+execute "phpdoc" do
+    command "pear channel-discover pear.phpdoc.org && pear install phpdoc/phpDocumentor"
     action :run
-    not_if "which phpunit"
+    not_if "which phpdoc"
+end
+
+execute "phing" do
+    command "pear channel-discover pear.phing.info && pear install phing/phing"
+    action :run
+    not_if "which phing"
+end
+execute "phpmd" do
+    command "pear channel-discover pear.phpmd.org && pear install --alldeps phpmd/PHP_PMD"
+    action :run
+    not_if "which phpmd"
 end
 
 directory "/var/lib/php/session" do

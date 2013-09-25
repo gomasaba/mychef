@@ -14,9 +14,23 @@ service "memcached" do
   action :start
 end
 
+service "iptables" do
+  supports :status => true, :restart => true, :reload => true
+  action [:disable, :start]
+end
+
 package "gd" do
     action :install
 end
+
+package "ImageMagick" do
+    action :install
+end
+package "ImageMagick-devel" do
+    action :install
+end
+
+
 
 package "vim" do
     action :install
