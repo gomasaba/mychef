@@ -28,3 +28,7 @@ end
 template "/etc/httpd/conf.d/phpPgAdmin.conf" do
   notifies :restart, 'service[httpd]'
 end
+
+template "/etc/httpd/conf.d/vhost.conf" do
+  notifies :restart, 'service[httpd]'
+end

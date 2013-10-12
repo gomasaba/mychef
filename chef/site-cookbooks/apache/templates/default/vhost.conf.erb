@@ -1,0 +1,12 @@
+<% if node['httpd']['vhost'] %>
+<% node['httpd']['vhost'].each do | key,val| %>
+<VirtualHost <%= val['ip_address'] %>>
+    ServerName <%= key %>
+    DocumentRoot <%= val['document_root'] %>
+    SetEnv DOMAIN_NAME <%= key %>
+    <% if node['httpd']['JAPAN_PRESIDENT_IP'] %>
+    SetEnv JAPAN_PRESIDENT_IP <%= node['httpd']['JAPAN_PRESIDENT_IP'] %>
+	<% end %>
+</VirtualHost>
+<% end %>
+<% end %>

@@ -3,7 +3,17 @@
         "servers": ["clock.nc.fukuoka-u.ac.jp", "clock2.tl.fukuoka-u.ac.jp"]
     },
     "httpd": {
-        "document_root": "/projects/www/html"
+        "document_root": "/projects/www/www",
+        "vhost":{
+            "site1": {
+                "ip_address"   :"192.168.33.20",
+                "document_root": "/projects/www1/html"
+            },
+            "site2": {
+                "ip_address"   :"192.168.33.21",
+                "document_root": "/projects/www2/html"
+            }
+        }
     },
     "postgresql": {
         "version":"9.2",

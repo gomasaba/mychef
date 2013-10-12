@@ -23,24 +23,24 @@ end
 #
 # pear channel install
 #
-execute "phpdoc" do
-    command "pear channel-discover doc.php.net"
+execute "pear-channel-phpdoc" do
+    command "pear channel-discover pear.phpdoc.org"
     action :run
-    not_if "pear list-channels | grep doc.php.net"
+    not_if "pear list-channels | grep pear.phpdoc.org"
 end
-execute "phing" do
+execute "pear-channel-phing" do
     command "pear channel-discover pear.phing.info"
     action :run
     not_if "pear list-channels | grep pear.phing.info"
 end
 
-execute "phpmd" do
+execute "pear-channel-phpmd" do
     command "pear channel-discover pear.phpmd.org"
     action :run
     not_if "pear list-channels | grep pear.phpmd.org"
 end
 
-execute "phpcs" do
+execute "pear-channel-phpcs" do
     command "pear channel-discover pear.cakephp.org"
     action :run
     not_if "pear list-channels | grep pear.cakephp.org"
@@ -48,25 +48,25 @@ end
 #
 # pear install
 #
-execute "phpdoc" do
+execute "pear-phpdoc" do
     command "pear install phpdoc/phpDocumentor"
     action :run
     not_if "which phpdoc"
 end
 
-execute "phing" do
+execute "pear-phing" do
     command "pear install phing/phing"
     action :run
     not_if "which phing"
 end
 
-execute "phpmd" do
+execute "pear-phpmd" do
     command "pear install --alldeps phpmd/PHP_PMD"
     action :run
     not_if "which phpmd"
 end
 
-execute "phpcs" do
+execute "pear-phpcs" do
     command "pear install PHP_CodeSniffer && pear install cakephp/CakePHP_CodeSniffer"
     action :run
     not_if "which phpcs"

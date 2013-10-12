@@ -4,6 +4,6 @@
 Thumbs.db
 
 chef/nodes/*
-!chef/nodes/vagrant.json
+!sample-vagrant.json
 .vagrant/*
 !empty
