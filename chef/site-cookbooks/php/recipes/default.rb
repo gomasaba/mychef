@@ -13,28 +13,72 @@
         notifies :restart, 'service[httpd]'
     end
 end
+
 execute "phpunit" do
     command "pear config-set auto_discover 1 && pear install pear.phpunit.de/PHPUnit"
     action :run
     not_if "which phpunit"
 end
 
+#
+# pear channel install
+#
 execute "phpdoc" do
-    command "pear channel-discover pear.phpdoc.org && pear install phpdoc/phpDocumentor"
+    command "pear channel-discover doc.php.net"
+    action :run
+    not_if "pear list-channels | grep doc.php.net"
+end
+execute "phing" do
+    command "pear channel-discover pear.phing.info"
+    action :run
+    not_if "pear list-channels | grep pear.phing.info"
+end
+
+execute "phpmd" do
+    command "pear channel-discover pear.phpmd.org"
+    action :run
+    not_if "pear list-channels | grep pear.phpmd.org"
+end
+
+execute "phpcs" do
+    command "pear channel-discover pear.cakephp.org"
+    action :run
+    not_if "pear list-channels | grep pear.cakephp.org"
+end
+#
+# pear install
+#
+execute "phpdoc" do
+    command "pear install phpdoc/phpDocumentor"
     action :run
     not_if "which phpdoc"
 end
 
 execute "phing" do
-    command "pear channel-discover pear.phing.info && pear install phing/phing"
+    command "pear install phing/phing"
     action :run
     not_if "which phing"
 end
+
 execute "phpmd" do
-    command "pear channel-discover pear.phpmd.org && pear install --alldeps phpmd/PHP_PMD"
+    command "pear install --alldeps phpmd/PHP_PMD"
     action :run
     not_if "which phpmd"
 end
+
+execute "phpcs" do
+    command "pear install PHP_CodeSniffer && pear install cakephp/CakePHP_CodeSniffer"
+    action :run
+    not_if "which phpcs"
+end
+
+execute "phpcpd" do
+    command "pear install phpunit/phpcpd"
+    action :run
+    not_if "which phpcpd"
+end
+
+
 
 directory "/var/lib/php/session" do
     owner "apache"
