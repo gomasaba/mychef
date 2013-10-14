@@ -14,6 +14,13 @@
     end
 end
 
+execute "composer" do
+    command "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin;mv usr/local/bin/composer.phar /usr/local/bin/composer"
+    action :run
+    not_if "which composer"
+end
+
+
 execute "phpunit" do
     command "pear config-set auto_discover 1 && pear install pear.phpunit.de/PHPUnit"
     action :run
