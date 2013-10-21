@@ -4,6 +4,12 @@ NameVirtualHost *:443
 <VirtualHost <%= val['ip_address'] %>:80>
     ServerName <%= val['ip_address'] %>
     DocumentRoot <%= val['document_root'] %>
+
+	<% if val['env'] %>
+	<% val['env'].each do | key,val| %>
+	SetEnv <%= key %> <%= val %>
+	<% end %>
+	<% end %>
 </VirtualHost>
 <VirtualHost <%= val['ip_address'] %>:443>
     ServerName <%= val['ip_address'] %>
@@ -11,9 +17,15 @@ NameVirtualHost *:443
     SSLEngine on
     SSLCertificateFile /etc/pki/tls/certs/localhost.crt
     SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
-
     LogLevel warn
     SSLEngine on
+
+	<% if val['env'] %>
+	<% val['env'].each do | key,val| %>
+	SetEnv <%= key %> <%= val %>
+	<% end %>
+	<% end %>
+
 </VirtualHost>
 <% end %>
 <% end %>

@@ -11,7 +11,10 @@
             },
             "site2": {
                 "ip_address"   :"192.168.33.21",
-                "document_root": "/projects/www2/html"
+                "document_root": "/projects/www2/html",
+                "env":{
+                    "APPLICATION_ENV" : "development"
+                }
             }
         }
     },
