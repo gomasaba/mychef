@@ -70,7 +70,7 @@
         }
     },
     "mysql" : {
-        "bind-address" : "0.0.0.0",
+        "bind_address" : "0.0.0.0",
         "server_debian_password" : "www",
         "server_root_password" : "www",
         "server_repl_password" : "www"

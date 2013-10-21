@@ -7,3 +7,4 @@ chef/nodes/*
 !sample-vagrant.json
 .vagrant/*
 !empty
+Vagrantfile
