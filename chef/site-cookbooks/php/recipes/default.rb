@@ -13,6 +13,10 @@
         notifies :restart, 'service[httpd]'
     end
 end
+template "/etc/php.d/xdebug.ini" do
+    source "xdebug.ini.erb"
+    notifies :restart, 'service[httpd]'
+end
 
 execute "composer" do
     command "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin;mv usr/local/bin/composer.phar /usr/local/bin/composer"
